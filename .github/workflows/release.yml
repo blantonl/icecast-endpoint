@@ -109,7 +109,7 @@ jobs:
             cp manifest.json "dist/$ID-$VERSION.manifest.json"
           fi
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: dist-${{ matrix.target }}
           path: dist/*
@@ -124,7 +124,7 @@ jobs:
       attestations: write
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with: { pattern: dist-*, path: dist, merge-multiple: true }
       - name: Checksums
         run: |
@@ -138,7 +138,7 @@ jobs:
           v="${{ needs.meta.outputs.version }}"
           awk -v v="## [$v]" 'index($0, v) == 1 {on = 1; next} on && /^## / {exit} on' CHANGELOG.md > notes.md 2>/dev/null || true
           [ -s notes.md ] || echo "${{ needs.meta.outputs.id }} $v" > notes.md
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           body_path: notes.md
           files: dist/*

@@ -3,3 +3,4 @@
 # Developing against a local checkout of the SDK (see the template's docs/testing.md).
 /.cargo/config.toml
 .DS_Store
+CLAUDE.local.md

@@ -90,7 +90,31 @@ run a local Icecast server and point the plugin at it.
 - The release workflow builds Linux, macOS, and Windows binaries.
 - Add a `## [X.Y.Z]` section to CHANGELOG.md for each version. The workflow uses it as the release notes.
 - Whenever dependencies change, regenerate THIRD-PARTY-LICENSES.md with `cargo about generate --offline about.hbs -o THIRD-PARTY-LICENSES.md` (tool: `cargo install cargo-about --locked --features cli`; not a Cargo.toml dependency) and commit it.
-- Registry submission: see the template's registry.md.
+- Submit every release to the registry (below), so the plugin store never skips a version.
+
+### Registry submission
+
+The plugin store lists releases from the registry, github.com/TrunkRecorder/plugins (see the template's registry.md).
+A release gets there by a pull request from the user's fork of it. `scripts/registry-pr.sh` checks every step;
+machine-specific details (where the registry clone is) are in CLAUDE.local.md.
+
+1. Release first: the tag on `origin`, the mirror has carried it to GitHub, and the Release workflow has finished.
+2. `scripts/registry-pr.sh prepare X.Y.Z --registry DIR`. It checks the release (tag on origin and GitHub at the same
+   commit, Cargo.toml and CHANGELOG, the release published, the workflow passed, all four archives in SHA256SUMS with
+   provenance attestations) and the clone (`origin` is the canonical repo, not GitHub; `upstream` is the registry;
+   clean). Then it writes the entry with the registry's `add-release` on branch `icecast-endpoint-X.Y.Z`, runs the
+   registry's `check`, checks that only `plugins/icecast-endpoint.json` and `index.json` changed and that the branch
+   merges cleanly, commits, and prints the push command.
+3. Push the branch to the clone's `origin` only, with the command it printed.
+4. `scripts/registry-pr.sh verify X.Y.Z --registry DIR`. It checks the branch is on `origin`, that the mirror carried
+   it to the GitHub fork at the same commit, the entry and `check` again, and whether a PR already exists. Only when
+   every check passes does it print the steps (compare link, title, description) to hand to the user, who opens the
+   PR on GitHub. Don't hand over PR steps that didn't come from a passing `verify`.
+
+**Never push the branch straight to the GitHub fork.** The fork is a push mirror of the canonical repo, and each sync
+deletes branches the canonical repo doesn't have. GitHub then closes the PR on its own, recorded as closed by the
+user, because the mirror's token is theirs. If a registry PR closes itself, push its branch to `origin`, run
+`verify` (it tells you to reopen the closed PR), and have the user press **Reopen pull request**.
 
 ## Working agreement
 

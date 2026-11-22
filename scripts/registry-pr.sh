@@ -160,7 +160,7 @@ check_listing() {
 registry_check() {
     if gh attestation --help >/dev/null 2>&1; then
         check_mode=full
-        python3 -I "$registry/tools/registry.py" check "plugins/$id.json" || fail "the registry's check failed"
+        (cd "$registry" && python3 -I tools/registry.py check "plugins/$id.json") || fail "the registry's check failed"
         ok "registry check (full: checksums, provenance, --describe)"
     else
         check_mode=quick

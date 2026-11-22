@@ -47,7 +47,7 @@ checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 
 [[package]]
 name = "icecast-endpoint"
-version = "0.5.1"
+version = "0.5.2"
 dependencies = [
  "mp3lame-encoder",
  "schemars",
@@ -241,9 +241,9 @@ dependencies = [
 
 [[package]]
 name = "trunk-recorder-plugin"
-version = "0.8.0"
+version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9da2b5da860ea26119864505f20aa59c0628c8d7959bdef9c794ec1868fc21c1"
+checksum = "8395c406ff270fbdbe805616ab25d235a825065c7dd4f764acdb69b6b328c069"
 dependencies = [
  "schemars",
  "serde",

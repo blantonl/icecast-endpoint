@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.2]
+
+Built with trunk-recorder-plugin 0.14.0, for Trunk Recorder Pro v0.4.0 and later.
+
+### Changed
+
+- **A system's own feeds keep working on Trunk Recorder Pro v0.4.0.** From v0.4.0, a system can set
+  only the settings a plugin offers it (upstream "Plugins: a system sets only what a plugin offers",
+  SDK 0.13.0). Icecast Endpoint now offers **Feeds**: a system's card in Setup shows its feeds, and
+  feeds a system already had apply again. They play only that system's calls, as before.
+- **On or off, system by system.** Trunk Recorder Pro v0.4.0's **Systems** setting on the plugin's
+  card turns it off for a system: none of that system's calls reach any feed.
+
 ## [0.5.1]
 
 ### Changed

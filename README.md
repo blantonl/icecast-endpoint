@@ -15,7 +15,7 @@ talkgroups panned left and right so two calls can be heard at once.
 
 ## What you need
 
-- Trunk Recorder Pro v0.2.10 or later.
+- Trunk Recorder Pro v0.4.0 or later.
 - An Icecast mount to stream to: its server, port, mount and source password.
   For a Broadcastify feed, these are on your feed's **Technical** tab.
 
@@ -70,8 +70,10 @@ filled in.
 | Longest delay (seconds) | Calls that happen at the same time play one after another (on a stereo feed, each side on its own). When more than this much audio is waiting, the oldest waiting call is dropped. Default: 60. For a feed meant to sound live, 10 to 15 keeps it close to real time. |
 
 You can add as many feeds as you like, each with its own mount. A system can
-also have feeds of its own, set on the system's card under **Systems**. Those
-feeds play only that system's calls.
+also have feeds of its own, set in its *shared settings* on the system's card
+in Setup. Those feeds play only that system's calls, and the plugin's own
+feeds don't play that system. To leave a system out altogether, turn the
+plugin off for it under **Systems** on the plugin's card in Setup → Plugins.
 
 ### Choosing talkgroups
 

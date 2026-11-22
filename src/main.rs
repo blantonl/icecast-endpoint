@@ -272,6 +272,8 @@ impl Plugin for IcecastEndpoint {
         Manifest {
             name: "Icecast Endpoint".into(),
             subscribe: vec![topic::AUDIO.into(), topic::CALL_START.into(), topic::CALL_END.into(), topic::CALL_CONCLUDED.into()],
+            // A system can have feeds of its own (for it alone; see start).
+            system_overrides: vec!["feeds".into()],
             // The id, version, description, … come from Cargo.toml.
             ..trunk_recorder_plugin::manifest!()
         }
@@ -745,6 +747,9 @@ mod tests {
         let m = trunk_recorder_plugin::describe::<IcecastEndpoint>();
         assert_eq!(m.subscribe, ["audio", "call.start", "call.end", "call.concluded"]);
         assert!(m.system_config.is_none());
+        // A system can have feeds of its own, and nothing else of its own.
+        assert_eq!(m.system_overrides, ["feeds"]);
+        assert!(m.site_overrides.is_empty());
     }
 
     #[test]

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.3]
+
+### Added
+
+- **The title says when it's quiet** (#4). With **Show the talkgroup as the title** on, the title
+  no longer holds the last call's talkgroup through a quiet stretch: once nothing has played for
+  **Quiet after (seconds)** (default 5), it changes to **Title when quiet**: empty (the default)
+  clears it, or a name such as "Scanning". The next call names itself again. 0 keeps the last call's
+  title, as before.
+- **Title**: what the title says, with `{alias}`, `{talkgroup}` and `{system}`. The default,
+  `{alias} ({talkgroup})`, is as before ("Fire Dispatch (101)"); `{alias}` alone leaves off the
+  talkgroup number. A talkgroup with no alpha tag is still "Talkgroup 101".
+
 ## [0.5.2]
 
 Built with trunk-recorder-plugin 0.14.0, for Trunk Recorder Pro v0.4.0 and later.
